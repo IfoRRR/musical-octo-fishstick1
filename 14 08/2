@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Arctochka
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			List<Prisoner> crimes = new List<Prisoner>();
+
+			Prisoner prisoner1 = new Prisoner("Иванов Степан", "Кража");
+			crimes.Add(prisoner1);
+
+			Prisoner prisoner2 = new Prisoner("Петров Алексей", "Антиправительственное");
+			crimes.Add(prisoner2);
+
+			Prisoner prisoner3 = new Prisoner("Сидоров Виктор", "Убийство");
+			crimes.Add(prisoner3);
+			foreach(Prisoner prisoner in crimes)
+			{
+                Console.WriteLine(prisoner.FIO);
+            }
+            Console.WriteLine();
+            var filteredPeople = crimes.Where(x => x.Crime != "Антиправительственное").ToList();
+			foreach(Prisoner prisoner in filteredPeople) 
+			{ 
+				Console.WriteLine(prisoner.FIO);
+			}
+			
+		}
+	}
+	// Произошла амнистия.Все преступники с "Антиправительственное" должны быть выпущены . Показать список до и после
+	class Prisoner
+	{
+		public string FIO { get; set; }
+		public string Crime { get; set; }
+		public Prisoner(string fio,string crime ) 
+		{
+			FIO = fio;	
+	        Crime = crime;
+		}
+	}
+}
