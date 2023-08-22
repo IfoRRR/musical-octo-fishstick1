@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+
+namespace Charp
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			List<Player> players = new List<Player>();
+			players.Add(new Player("Голиаф", 12, 150));
+			players.Add(new Player("Игрис", 20, 200));
+			players.Add(new Player("Неберио", 22, 500));
+			players.Add(new Player("Зоханн", 24, 1750));
+			players.Add(new Player("Тильда", 37, 1100));
+			players.Add(new Player("Цербер", 47, 100000));
+			players.Add(new Player("Торс", 25, 10000));
+			players.Add(new Player("Арни", 30, 15020));
+			players.Add(new Player("Волвос", 34, 15000));
+			players.Add(new Player("Берн", 50, 22250));
+
+			var topPlayersByLevel = players.OrderByDescending(player => player.Level)
+										  .Take(3)
+										  .ToList();
+
+			Console.WriteLine("Топ 3 игроков по уровню:");
+			foreach (var player in topPlayersByLevel)
+			{
+				Console.WriteLine(player.Name + " - Уровень: " + player.Level);
+			}
+
+			var topPlayersByStrength = players.OrderByDescending(player => player.Power)
+											  .Take(3)
+											  .ToList();
+
+			Console.WriteLine("\nТоп 3 игроков по силе:");
+			foreach (var player in topPlayersByStrength)
+			{
+				Console.WriteLine(player.Name + " - Сила: " + player.Power);
+			}
+		}
+	}
+
+
+	class Player
+	{
+		public string Name { get; private set; }
+		public int Level { get; private set; }
+		public int Power { get; private set; }
+		public Player(string name, int level, int power)
+		{
+			Name = name;
+			Level = level;
+			Power = power;
+		}
+	}
+}
